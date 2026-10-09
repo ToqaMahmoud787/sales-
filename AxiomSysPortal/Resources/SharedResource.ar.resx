@@ -1,0 +1,161 @@
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>أكسيوم للمبيعات</value>
+  </data>
+  <data name="DeliveryTerms" xml:space="preserve">
+    <value>شروط تسليم المبيعات</value>
+  </data>
+  <data name="DeliveryTermsDescription" xml:space="preserve">
+    <value>إدارة خيارات التسليم والمدد اللازمة.</value>
+  </data>
+  <data name="32" xml:space="preserve">
+    <value>إضافة</value>
+  </data>
+  <data name="5583" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="18" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="3" xml:space="preserve">
+    <value>الكود</value>
+  </data>
+  <data name="4" xml:space="preserve">
+    <value>الاسم الإنجليزي</value>
+  </data>
+  <data name="5" xml:space="preserve">
+    <value>الاسم العربي</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>الأيام</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>الإجراءات</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>غير محدد</value>
+  </data>
+  <data name="AddTerm" xml:space="preserve">
+    <value>إضافة شروط تسليم</value>
+  </data>
+  <data name="EditTerm" xml:space="preserve">
+    <value>تعديل شروط التسليم</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>ابحث في شروط التسليم…</value>
+  </data>
+  <data name="DeleteTitle" xml:space="preserve">
+    <value>هل تريد حذف شروط التسليم؟</value>
+  </data>
+  <data name="DeleteText" xml:space="preserve">
+    <value>سيتم حذف السجل المحدد نهائيًا.</value>
+  </data>
+  <data name="ApiUnavailable" xml:space="preserve">
+    <value>تعذر إكمال الطلب. تحقق من خدمة الواجهة وحاول مجددًا.</value>
+  </data>
+  <data name="ScriptsUnavailable" xml:space="preserve">
+    <value>تعذر تحميل مكتبات الصفحة. تحقق من الاتصال بالإنترنت وأعد تحميل الصفحة.</value>
+  </data>
+  <data name="InvalidInput" xml:space="preserve">
+    <value>يرجى التحقق من القيم المدخلة والمحاولة مجددًا.</value>
+  </data>
+  <data name="EmptyTable" xml:space="preserve">
+    <value>لا توجد شروط تسليم حتى الآن.</value>
+  </data>
+  <data name="ZeroRecords" xml:space="preserve">
+    <value>لا توجد سجلات مطابقة.</value>
+  </data>
+  <data name="TableInfo" xml:space="preserve">
+    <value>عرض _START_ إلى _END_ من _TOTAL_ سجل</value>
+  </data>
+  <data name="TableInfoEmpty" xml:space="preserve">
+    <value>عرض 0 سجل</value>
+  </data>
+  <data name="TableInfoFiltered" xml:space="preserve">
+    <value>(تمت التصفية من _MAX_ سجل)</value>
+  </data>
+  <data name="LengthMenu" xml:space="preserve">
+    <value>عرض _MENU_ سجل</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>جارٍ التحميل…</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>الأول</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>الأخير</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="SortColumn" xml:space="preserve">
+    <value>اضغط للترتيب</value>
+  </data>
+  <data name="ReverseSort" xml:space="preserve">
+    <value>اضغط لعكس الترتيب</value>
+  </data>
+  <data name="RemoveSort" xml:space="preserve">
+    <value>اضغط لإلغاء الترتيب</value>
+  </data>
+  <data name="PageNumber" xml:space="preserve">
+    <value>الصفحة </value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="InvalidLogin" xml:space="preserve">
+    <value>اسم المستخدم أو كلمة المرور غير صحيحة.</value>
+  </data>
+  <data name="RequiredFields" xml:space="preserve">
+    <value>أدخل اسم المستخدم وكلمة المرور.</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>العربية</value>
+  </data>
+  <data name="SelectStatus" xml:space="preserve">
+    <value>اختر الحالة</value>
+  </data>
+</root>

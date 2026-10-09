@@ -49,8 +49,12 @@ namespace AxiomSysDL.Contexts
                 .HasColumnType("NUMBER(4)");
 
             entity.Property(x => x.ActiveFlag)
-                .HasColumnName("ACTIVE_FLAG")
-                .HasColumnType("NUMBER(1)");
+    .HasColumnName("ACTIVE_FLAG")
+    .HasColumnType("NUMBER(1)")
+    .HasConversion<bool?>(
+        value => value.HasValue ? value.Value == 1 : null,
+        value => value.HasValue ? (value.Value ? 1 : 0) : null
+    );
 
             entity.Property(x => x.EntryUser)
                 .HasColumnName("ENTRY_USER")

@@ -1,0 +1,8 @@
+body { background: #f5f7fb; color: #17253b; font-family: system-ui, sans-serif; }
+.card { border: 1px solid #e4e8ef; border-radius: 14px; }
+.btn-primary { background: #214e9b; border-color: #214e9b; }
+thead { background: #f2f5fa; }
+.table td, .table th { vertical-align: middle; padding: .9rem .75rem; }
+.latin-number { direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+#tableSearch { max-width: 320px; }
+a { color: #214e9b; }

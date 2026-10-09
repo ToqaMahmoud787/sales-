@@ -1,0 +1,48 @@
+@using System.Globalization
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AxiomSysPortal.SharedResource> SharedLocalizer
+@{
+    var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var rtl = culture == "ar";
+    var pagePath = ViewContext.RouteData.Values["page"]?.ToString() ?? "/SALES/DELIVERYTERMS/Index";
+}
+<!DOCTYPE html>
+<html lang="@culture" dir="@(rtl ? "rtl" : "ltr")">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - @SharedLocalizer["AppName"]</title>
+    @if (rtl)
+    {
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css" />
+    }
+    else
+    {
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
+    }
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="~/css/assessment.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="border-bottom bg-white">
+        <nav class="container d-flex align-items-center gap-3 py-3 flex-wrap">
+            <a class="fw-bold text-decoration-none me-auto" asp-page="/SALES/DELIVERYTERMS/Index" asp-route-culture="@culture">@SharedLocalizer["AppName"]</a>
+            <a asp-page="@pagePath" asp-route-culture="en" lang="en">@SharedLocalizer["English"]</a>
+            <a asp-page="@pagePath" asp-route-culture="ar" lang="ar">@SharedLocalizer["Arabic"]</a>
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <span class="text-muted">@User.Identity.Name</span>
+                <form method="post" asp-page="/Account/Logout" asp-route-culture="@culture">
+                    <button class="btn btn-outline-secondary btn-sm" type="submit">@SharedLocalizer["SignOut"]</button>
+                </form>
+            }
+        </nav>
+    </header>
+    <main class="container py-5">@RenderBody()</main>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.3/dist/sweetalert2.all.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

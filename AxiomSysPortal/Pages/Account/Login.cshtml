@@ -1,0 +1,23 @@
+@page "/{culture:regex(^(en|ar)$)}/Account/Login"
+@model AxiomSysPortal.Pages.Account.LoginModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AxiomSysPortal.SharedResource> SharedLocalizer
+@{
+    Layout = "_AssessmentLayout";
+    ViewData["Title"] = SharedLocalizer["SignIn"];
+}
+<div class="card shadow-sm mx-auto" style="max-width:440px">
+    <div class="card-body p-4">
+        <h1 class="h4 mb-4">@SharedLocalizer["SignIn"]</h1>
+        @if (Model.Error != null)
+        {
+            <div class="alert alert-danger" role="alert">@Model.Error</div>
+        }
+        <form method="post">
+            <label asp-for="Username" class="form-label">@SharedLocalizer["Username"]</label>
+            <input asp-for="Username" class="form-control mb-3" autocomplete="username" required />
+            <label asp-for="Password" class="form-label">@SharedLocalizer["Password"]</label>
+            <input asp-for="Password" type="password" class="form-control mb-4" autocomplete="current-password" required />
+            <button class="btn btn-primary w-100" type="submit">@SharedLocalizer["SignIn"]</button>
+        </form>
+    </div>
+</div>

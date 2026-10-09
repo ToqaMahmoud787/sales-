@@ -1,6 +1,4 @@
-using System;
-using AxiomSysBL.IServices;
-using AxiomSysBL.Models;
+using AxiomSysBL.IServices;using AxiomSysDL.Models;
 using Microsoft.Extensions.Logging;
 using Oracle.ManagedDataAccess.Client;
 
@@ -35,27 +33,14 @@ public class SharedService : ISharedService
             }
         }
 
-        if (oracleException != null)
+        if (oracleException?.Number == 1)
         {
-            if (oracleException.Number == 1)
+            return new ResponseModel
             {
-                return new ResponseModel
-                {
-                    status = false,
-                    messageEn = "A record with this code already exists.",
-                    messageAr = "يوجد سجل بهذا الكود بالفعل."
-                };
-            }
-
-            if (oracleException.Number == 12899)
-            {
-                return new ResponseModel
-                {
-                    status = false,
-                    messageEn = "A text field exceeds the maximum database column size (60 bytes in AL32UTF8).",
-                    messageAr = "يتجاوز أحد الحقول النصية الحد الأقصى لحجم العمود في قاعدة البيانات (60 بايت)."
-                };
-            }
+                status = false,
+                messageEn = "A record with this code already exists.",
+                messageAr = "يوجد سجل بهذا الكود بالفعل."
+            };
         }
 
         return new ResponseModel

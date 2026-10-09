@@ -1,0 +1,161 @@
+@page "/{culture:regex(^(en|ar)$)}/SALES/DELIVERYTERMS/Index"
+@model AxiomSysPortal.Pages.SALES.DELIVERYTERMS.IndexModel
+@using System.Globalization
+@using System.Text.Json
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AxiomSysPortal.SharedResource> SharedLocalizer
+@{
+    Layout = "_AssessmentLayout";
+    ViewData["Title"] = SharedLocalizer["DeliveryTerms"];
+    var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var success = Model.SuccessMessage;
+    var error = Model.ErrorMessage;
+    var settings = new
+    {
+        editUrl = Url.Page("/SALES/DELIVERYTERMS/Index", "Edit", new { culture }),
+        loginUrl = Url.Page("/Account/Login", new { culture }),
+        deleteTitle = SharedLocalizer["DeleteTitle"].Value,
+        deleteText = SharedLocalizer["DeleteText"].Value,
+        confirm = SharedLocalizer["18"].Value,
+        cancel = SharedLocalizer["Cancel"].Value,
+        apiError = SharedLocalizer["ApiUnavailable"].Value,
+        scriptsError = SharedLocalizer["ScriptsUnavailable"].Value,
+        table = new
+        {
+            emptyTable = SharedLocalizer["EmptyTable"].Value,
+            zeroRecords = SharedLocalizer["ZeroRecords"].Value,
+            info = SharedLocalizer["TableInfo"].Value,
+            infoEmpty = SharedLocalizer["TableInfoEmpty"].Value,
+            infoFiltered = SharedLocalizer["TableInfoFiltered"].Value,
+            lengthMenu = SharedLocalizer["LengthMenu"].Value,
+            search = SharedLocalizer["Search"].Value,
+            loadingRecords = SharedLocalizer["Loading"].Value,
+            processing = SharedLocalizer["Loading"].Value,
+            paginate = new
+            {
+                first = SharedLocalizer["First"].Value,
+                last = SharedLocalizer["Last"].Value,
+                next = SharedLocalizer["Next"].Value,
+                previous = SharedLocalizer["Previous"].Value
+            },
+            aria = new
+            {
+                orderable = SharedLocalizer["SortColumn"].Value,
+                orderableReverse = SharedLocalizer["ReverseSort"].Value,
+                orderableRemove = SharedLocalizer["RemoveSort"].Value,
+                paginate = new
+                {
+                    first = SharedLocalizer["First"].Value,
+                    last = SharedLocalizer["Last"].Value,
+                    next = SharedLocalizer["Next"].Value,
+                    previous = SharedLocalizer["Previous"].Value,
+                    number = SharedLocalizer["PageNumber"].Value
+                }
+            }
+        }
+    };
+}
+<div class="d-flex justify-content-between align-items-center mb-4 gap-3 flex-wrap">
+    <div>
+        <h1 class="h3 mb-2">@SharedLocalizer["DeliveryTerms"]</h1>
+        <p class="text-muted mb-0">@SharedLocalizer["DeliveryTermsDescription"]</p>
+    </div>
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addModal">@SharedLocalizer["32"]</button>
+</div>
+<div id="clientError" class="alert alert-danger d-none" role="alert"></div>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div id="tableSearch" class="mb-3">
+            <label for="searchInput" class="form-label">@SharedLocalizer["Search"]</label>
+            <input id="searchInput" class="form-control" type="search" placeholder="@SharedLocalizer["SearchPlaceholder"]" />
+        </div>
+        <div class="table-responsive">
+            <table id="dataTable" class="table table-hover w-100">
+                <thead><tr>
+                    <th>@SharedLocalizer["3"]</th>
+                    <th>@SharedLocalizer["4"]</th>
+                    <th>@SharedLocalizer["5"]</th>
+                    <th>@SharedLocalizer["Days"]</th>
+                    <th>@SharedLocalizer["Active"]</th>
+                    <th>@SharedLocalizer["Actions"]</th>
+                </tr></thead>
+                <tbody>
+                @foreach (var term in Model.Terms)
+                {
+                    var code = term.Code.ToString(CultureInfo.InvariantCulture);
+                    <tr>
+                        <td class="latin-number" lang="en">@code</td>
+                        <td>@term.BName</td>
+                        <td>@term.SName</td>
+                        <td class="latin-number" lang="en">@(term.Days?.ToString(CultureInfo.InvariantCulture))</td>
+                        <td>@SharedLocalizer[term.ActiveFlag == 1 ? "Yes" : term.ActiveFlag == 0 ? "No" : "NotSet"]</td>
+                        <td class="text-nowrap">
+                            <button type="button" class="btn btn-sm btn-outline-primary edit-term" data-code="@code">@SharedLocalizer["5583"]</button>
+                            <button type="button" class="btn btn-sm btn-outline-danger delete-term" data-code="@code">@SharedLocalizer["18"]</button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@foreach (var action in new[] { "Add", "Edit" })
+{
+    var editing = action == "Edit";
+    var prefix = editing ? "edit" : "add";
+    <div class="modal fade" id="@(prefix + "Modal")" tabindex="-1" aria-labelledby="@(prefix + "Title")" aria-hidden="true">
+        <div class="modal-dialog"><div class="modal-content">
+            <form method="post" asp-page-handler="@action" asp-route-culture="@culture">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="@(prefix + "Title")">@SharedLocalizer[editing ? "EditTerm" : "AddTerm"]</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@SharedLocalizer["Close"]"></button>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label" for="@(prefix + "Code")">@SharedLocalizer["3"]</label>
+                    <input class="form-control mb-3 latin-number" id="@(prefix + "Code")" name="Input.Code" data-field="code" type="text" inputmode="numeric" pattern="[0-9]{1,3}" maxlength="3" lang="en" required readonly="@editing" />
+                    <label class="form-label" for="@(prefix + "BName")">@SharedLocalizer["4"]</label>
+                    <input class="form-control mb-3" id="@(prefix + "BName")" name="Input.BName" data-field="bName" maxlength="60" required />
+                    <label class="form-label" for="@(prefix + "SName")">@SharedLocalizer["5"]</label>
+                    <input class="form-control mb-3" id="@(prefix + "SName")" name="Input.SName" data-field="sName" maxlength="60" required />
+                    <label class="form-label" for="@(prefix + "Days")">@SharedLocalizer["Days"]</label>
+                    <input class="form-control mb-3 latin-number" id="@(prefix + "Days")" name="Input.Days" data-field="days" type="text" inputmode="numeric" pattern="[0-9]{0,4}" maxlength="4" lang="en" />
+                    <label class="form-label" for="@(prefix + "Active")">@SharedLocalizer["Active"]</label>
+                    <select class="form-select" id="@(prefix + "Active")" name="Input.ActiveFlag" data-field="activeFlag" required>
+                        <option value="">@SharedLocalizer["SelectStatus"]</option>
+                        <option value="1" selected>@SharedLocalizer["Yes"]</option>
+                        <option value="0">@SharedLocalizer["No"]</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">@SharedLocalizer["Cancel"]</button>
+                    <button class="btn btn-primary" type="submit">@SharedLocalizer["Save"]</button>
+                </div>
+            </form>
+        </div></div>
+    </div>
+}
+<form id="deleteForm" method="post" asp-page-handler="Delete" asp-route-culture="@culture">
+    <input type="hidden" id="deleteCode" name="code" />
+</form>
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:2000">
+    @if (!string.IsNullOrWhiteSpace(success))
+    {
+        <div class="toast text-bg-success" role="status" data-bs-autohide="false">
+            <div class="d-flex"><div class="toast-body">@success</div>
+                <button type="button" class="btn-close btn-close-white m-2" data-bs-dismiss="toast" aria-label="@SharedLocalizer["Close"]"></button>
+            </div>
+        </div>
+    }
+    @if (!string.IsNullOrWhiteSpace(error))
+    {
+        <div class="toast text-bg-danger" role="alert" data-bs-autohide="false">
+            <div class="d-flex"><div class="toast-body">@error</div>
+                <button type="button" class="btn-close btn-close-white m-2" data-bs-dismiss="toast" aria-label="@SharedLocalizer["Close"]"></button>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    <script id="deliverySettings" type="application/json">@Html.Raw(JsonSerializer.Serialize(settings))</script>
+    <script src="~/PagesJS/SALES/DELIVERYTERMS.js" asp-append-version="true"></script>
+}
