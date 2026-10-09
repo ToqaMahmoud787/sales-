@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="AxiomSysBL/AxiomSysBL.csproj" />
+  <Project Path="AxiomSysDL/AxiomSysDL.csproj" />
+  <Project Path="AxiomSysPortal/AxiomSysPortal.csproj" />
+  <Project Path="AxiomSysSL/AxiomSysSL.csproj" />
+</Solution>

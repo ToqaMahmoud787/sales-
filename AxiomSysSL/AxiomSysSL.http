@@ -1,0 +1,6 @@
+@AxiomSysSL_HostAddress = http://localhost:5178
+
+GET {{AxiomSysSL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
